@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Full Suite">
+    <test name="Regression Tests">
+        <classes>
+            <class name="tests.LoginTest"/>
+            <!-- You can add more test classes here -->
+            <!-- <class name="tests.RegistrationTest"/> -->
+            <!-- <class name="tests.CartTest"/> -->
+        </classes>
+    </test>
+</suite>
