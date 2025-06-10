@@ -6,7 +6,9 @@ import com.aventstack.extentreports.Status;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import utils.DriverFactory;
 import utils.ExtentManager;
+import utils.ScreenshotUtil;
 
 public class ExtentTestNGListener implements ITestListener {
     private static ExtentReports extent = ExtentManager.getInstance();
@@ -20,12 +22,21 @@ public class ExtentTestNGListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
+        String screenshotPath = ScreenshotUtil.takeScreenshot(DriverFactory.getDriver(), result.getMethod().getMethodName());
         test.get().log(Status.PASS, "Test Passed");
+        test.get().addScreenCaptureFromPath(screenshotPath);
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         test.get().log(Status.SKIP, "Test Skipped");
+    }
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        String screenshotPath = ScreenshotUtil.takeScreenshot(DriverFactory.getDriver(), result.getMethod().getMethodName());
+        test.get().log(Status.FAIL, "Test Failed: " + result.getThrowable());
+        test.get().addScreenCaptureFromPath(screenshotPath);
     }
 
     @Override
