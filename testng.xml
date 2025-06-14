@@ -3,9 +3,7 @@
     <test name="Regression Tests">
         <classes>
             <class name="tests.LoginTest"/>
-            <!-- You can add more test classes here -->
-            <!-- <class name="tests.RegistrationTest"/> -->
-            <!-- <class name="tests.CartTest"/> -->
+            <class name="tests.ProductsTest"/>
         </classes>
     </test>
 </suite>
