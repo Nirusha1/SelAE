@@ -44,5 +44,11 @@ public class ExtentTestNGListener implements ITestListener {
         extent.flush();
     }
 
+    public static void info(String message) {
+        if (test.get() != null) {
+            test.get().info(message);
+        }
+    }
+
 
 }
