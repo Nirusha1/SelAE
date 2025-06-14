@@ -8,6 +8,12 @@ public class DriverFactory {
     private static WebDriver driver;
 
     public static WebDriver getDriver() {
+        // For singleton pattern
+        /**
+        if(driver != null)
+            return driver;
+         **/
+
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();

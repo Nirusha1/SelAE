@@ -48,4 +48,10 @@ public class SeleniumUtils {
         ExtentTestNGListener.info("Page loaded completely");
     }
 
+    public void scrollToElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        ExtentTestNGListener.info("Scrolled view to: " + element.getTagName());
+    }
+
 }
