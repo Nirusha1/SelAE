@@ -37,6 +37,12 @@ public class ProductsPage {
     @FindBy(xpath="//div[@class='product-information']/span")
     public WebElement productsDetailsProductsPrice;
 
+    @FindBy(xpath = "//input[@id='search_product']")
+    public WebElement searchProductField;
+
+    @FindBy(xpath="//button[@id='submit_search']")
+    public WebElement searchButton;
+
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
@@ -57,5 +63,12 @@ public class ProductsPage {
     public String getFirstProductTitle() {
         return utils.getText(productsPageProductTitles.getFirst(), "First Product Title");
     }
+
+    public void searchProduct(String searchKeyword){
+        utils.sendKeys(searchProductField, searchKeyword, "Enter Search String on Search Product Field");
+        utils.click(searchButton, "Search Product");
+    }
+
+
 
 }
