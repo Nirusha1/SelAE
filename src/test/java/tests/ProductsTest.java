@@ -44,4 +44,25 @@ public class ProductsTest extends BaseTest {
         ExtentTestNGListener.test.get().pass("Product price is displayed.");
 
     }
+
+    @Test
+    public void testSearchProductsPage() {
+        ExtentTestNGListener.test.get().info("Navigating to Products page");
+        String currentURL = "https://automationexercise.com/";
+        driver.get(currentURL);
+        ExtentTestNGListener.test.get().info("Navigated to: " + currentURL);
+
+        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage.navigateToProductsPage();
+        ExtentTestNGListener.test.get().pass("Products Page was navigated successfully");
+
+        String search_keyword="Blue Top";
+        productsPage.searchProduct(search_keyword);
+        Assert.assertFalse(productsPage.productsList.isEmpty());
+        Assert.assertTrue(productsPage.productsList.get(0).getText().contains(search_keyword));
+
+
+
+
+    }
 }
