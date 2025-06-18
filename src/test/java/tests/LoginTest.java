@@ -26,4 +26,19 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login was not successful.");
         ExtentTestNGListener.test.get().pass("Login test completed.");
     }
+
+    @Test
+    public void testInvalidLogin() {
+        ExtentTestNGListener.test.get().info("Navigating to login page");
+        String currentURL = "https://automationexercise.com/";
+        driver.get(currentURL);
+        ExtentTestNGListener.test.get().info("Navigated to: " + currentURL);
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.goToLoginPage();
+
+        loginPage.login("bhintunasayami123@gmail.com", "Selenium1233");
+        Assert.assertTrue(loginPage.isLoginInvalidMessageDisplayed(), "Login was not successful.");
+        ExtentTestNGListener.test.get().pass("Invalid Login test completed.");
+    }
 }

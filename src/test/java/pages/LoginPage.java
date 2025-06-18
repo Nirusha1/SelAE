@@ -12,6 +12,7 @@ public class LoginPage {
     private By passwordInput = By.xpath("//input[@data-qa='login-password']");
     private By loginBtn = By.xpath("//button[@data-qa='login-button']");
     private By loggedInAsText = By.xpath("//a[contains(text(),'Logged in as')]");
+    private By invalidLoginMessage = By.xpath("(//form/p)[1]");
 
     // Constructor
     public LoginPage(WebDriver driver) {
@@ -31,5 +32,9 @@ public class LoginPage {
 
     public boolean isLoginSuccessful() {
         return driver.findElement(loggedInAsText).isDisplayed();
+    }
+
+    public boolean isLoginInvalidMessageDisplayed(){
+        return driver.findElement(invalidLoginMessage).isDisplayed();
     }
 }
