@@ -1,6 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
+import com.google.gson.JsonObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,6 +43,28 @@ public class ProductsPage {
     @FindBy(xpath="//button[@id='submit_search']")
     public WebElement searchButton;
 
+    @FindBy(xpath = "(//a[@data-product-id='1'])[1]")
+    public WebElement firstProductAddToCartButton;
+
+    @FindBy(xpath = "(//a[@data-product-id='2'])[1]")
+    public WebElement secondProductAddToCartButton;
+
+    @FindBy(xpath = "(//div[@class='modal-body']//p)[1]")
+    public WebElement productAddedToCartSuccessMessage;
+
+    @FindBy(xpath="//div[@class='modal-footer']/button")
+    public WebElement continueShoppingButton;
+
+    @FindBy(xpath="//div[@class='productinfo text-center']/p")
+    public List<WebElement> productInfoTitles;
+
+    @FindBy(xpath = "//div[@class='productinfo text-center']/h2")
+    public List<WebElement> productInfoPrices;
+
+
+
+
+
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
@@ -67,6 +89,44 @@ public class ProductsPage {
     public void searchProduct(String searchKeyword){
         utils.sendKeys(searchProductField, searchKeyword, "Enter Search String on Search Product Field");
         utils.click(searchButton, "Search Product");
+    }
+
+    public void hoverOverProductCard(int i){
+        utils.hover(productsList.get(i));
+    }
+
+    public void addFirstProductToCart(){
+        utils.click(firstProductAddToCartButton, "Add Product To Cart");
+    }
+
+    public void addSecondProductToCart(){
+        utils.click(secondProductAddToCartButton, "Add Product To Cart");
+    }
+
+    public String getProductAddedToCartSuccessMessage(){
+        return utils.getText(productAddedToCartSuccessMessage, "Retreive text from success message for product added to cart");
+    }
+
+    public void clickContinueShoppingButton(){
+        utils.click(continueShoppingButton, "Continue Shopping");
+    }
+
+    public JsonObject getProductDetail(int i){
+        JsonObject productDetail = new JsonObject();
+
+        String productTitle = utils.getText(productInfoTitles.get(i), "Product Title");
+        String productPrice = utils.getText(productInfoPrices.get(i), "Product Price");
+
+        productDetail.addProperty("productTitle", productTitle);
+        productDetail.addProperty("productPrice", productPrice);
+
+        return productDetail;
+
+
+    }
+
+    public void scrollToProductList(){
+        utils.scrollToElement(firstProductAddToCartButton);
     }
 
 
