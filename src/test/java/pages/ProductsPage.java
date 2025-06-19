@@ -61,6 +61,15 @@ public class ProductsPage {
     @FindBy(xpath = "//div[@class='productinfo text-center']/h2")
     public List<WebElement> productInfoPrices;
 
+    @FindBy(xpath = "//a[@data-parent='#accordian' and @href='#Women']")
+    public WebElement womenCategoryLink;
+
+    @FindBy(xpath = "(//a[contains(text(), 'Tops')])[1]")
+    public WebElement topsSubCategoryLink;
+
+    @FindBy(xpath = "//h2[@class='title text-center']")
+    public WebElement productsCategoryPageTitle;
+
 
 
 
@@ -127,6 +136,11 @@ public class ProductsPage {
 
     public void scrollToProductList(){
         utils.scrollToElement(firstProductAddToCartButton);
+    }
+
+    public void navigateToProductSubCategory(){
+        utils.click(womenCategoryLink, "Women Category");
+        utils.click(topsSubCategoryLink, "Tops Sub Category");
     }
 
 

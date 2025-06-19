@@ -10,7 +10,7 @@ import utils.BaseTest;
 
 @Listeners(ExtentTestNGListener.class)
 public class ProductsTest extends BaseTest {
-    @Test
+    @Test(priority = 1)
     public void testProductsPage() {
         ExtentTestNGListener.test.get().info("Navigating to Products page");
         String currentURL = "https://automationexercise.com/";
@@ -45,7 +45,7 @@ public class ProductsTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(priority = 2)
     public void testSearchProductsPage() {
         ExtentTestNGListener.test.get().info("Navigating to Products page");
         String currentURL = "https://automationexercise.com/";
@@ -64,5 +64,22 @@ public class ProductsTest extends BaseTest {
 
 
 
+    }
+
+    @Test(priority = 3)
+    public void testProductCategoryNavigation() {
+        ExtentTestNGListener.test.get().info("Navigating to Products page");
+        String currentURL = "https://automationexercise.com/";
+        driver.get(currentURL);
+        ExtentTestNGListener.test.get().info("Navigated to: " + currentURL);
+
+        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage.navigateToProductsPage();
+        productsPage.scrollToProductList();
+        productsPage.navigateToProductSubCategory();
+        System.out.println(productsPage.productsCategoryPageTitle.getText());
+
+        Assert.assertTrue(productsPage.productsCategoryPageTitle.getText().contains("WOMEN - TOPS PRODUCTS"));
+        ExtentTestNGListener.test.get().pass("Products Subcategory Page was navigated successfully");
     }
 }
