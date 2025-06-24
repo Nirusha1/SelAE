@@ -21,8 +21,11 @@ public class ScreenshotUtil {
         try {
             Files.createDirectories(dest.getParentFile().toPath());
             Files.copy(src.toPath(), dest.toPath());
+            Thread.sleep(2000);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
 
         return filePath;
