@@ -46,4 +46,12 @@ public class CartTest extends BaseTest {
         Assert.assertEquals(secondProductDetailOnCart, secondProductDetail);
         ExtentTestNGListener.test.get().info("Product details on products page and cart matched for second product");
     }
+
+    @Test(dependsOnMethods = "testAddProductsToCart")
+    public void testRemoveProductsFromCart() {
+        CartPage cartPage = new CartPage(driver);
+        cartPage.deleteProductFromCart();
+        Assert.assertTrue(cartPage.emptyCartSpan.isDisplayed());
+        ExtentTestNGListener.test.get().info("Product Deletion From Cart Successfully Verified");
+    }
 }

@@ -22,6 +22,15 @@ public class CartPage {
     @FindBy(xpath = "//td[@class='cart_price']/p")
     public List<WebElement> productPricesOnCart;
 
+    @FindBy(xpath = "//a[@class='cart_quantity_delete']")
+    public List<WebElement> productDeleteButtons;
+
+    @FindBy(xpath = "(//a[@class='cart_quantity_delete'])[1]")
+    public WebElement firstProductDeleteButton;
+
+    @FindBy(xpath = "//span[@id='empty_cart']/p/b")
+    public WebElement emptyCartSpan;
+
     public CartPage(WebDriver driver) {
         this.driver = driver;
         utils = new SeleniumUtils(driver);
@@ -39,4 +48,14 @@ public class CartPage {
         productDetailsForProductOnCart.addProperty("productPrice", productPricesOnCart.get(i).getText());
         return productDetailsForProductOnCart;
     }
+
+    public void deleteProductFromCart(){
+        utils.click(productDeleteButtons.get(0), "delete first product");
+        utils.click(productDeleteButtons.get(1), "delete second product");
+    }
+
+    public String getTextFromEmptyCartSpan(){
+        return emptyCartSpan.getText();
+    }
+
 }
