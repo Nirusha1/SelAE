@@ -19,8 +19,13 @@ public class ExtentTestNGListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName(),
-                "Detailed test steps for " + result.getMethod().getMethodName());
+        String testTitle = result.getMethod().getDescription();
+        if (testTitle == null || testTitle.isEmpty()) {
+            testTitle = result.getMethod().getMethodName();
+        }
+
+        ExtentTest extentTest = extent.createTest(testTitle)
+                .assignCategory(result.getTestContext().getSuite().getName()); // Optional: shows suite name too
         test.set(extentTest);
     }
 
