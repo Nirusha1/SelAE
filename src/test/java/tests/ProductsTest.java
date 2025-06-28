@@ -1,5 +1,6 @@
 package tests;
 
+import com.aventstack.extentreports.ExtentTest;
 import listeners.ExtentTestNGListener;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -10,7 +11,7 @@ import utils.BaseTest;
 
 @Listeners(ExtentTestNGListener.class)
 public class ProductsTest extends BaseTest {
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Verify Products List and Details")
     public void testProductsPage() {
         ExtentTestNGListener.test.get().info("Navigating to Products page");
         String currentURL = "https://automationexercise.com/";
@@ -45,7 +46,7 @@ public class ProductsTest extends BaseTest {
 
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Verify Product Search")
     public void testSearchProductsPage() {
         ExtentTestNGListener.test.get().info("Navigating to Products page");
         String currentURL = "https://automationexercise.com/";
@@ -60,26 +61,21 @@ public class ProductsTest extends BaseTest {
         productsPage.searchProduct(search_keyword);
         Assert.assertFalse(productsPage.productsList.isEmpty());
         Assert.assertTrue(productsPage.productsList.get(0).getText().contains(search_keyword));
-
-
-
-
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "Verify Sub Category Navigation" )
     public void testProductCategoryNavigation() {
-        ExtentTestNGListener.test.get().info("Navigating to Products page");
+        ExtentTestNGListener.logStep("Navigating to Products page");
         String currentURL = "https://automationexercise.com/";
         driver.get(currentURL);
-        ExtentTestNGListener.test.get().info("Navigated to: " + currentURL);
+        ExtentTestNGListener.logStep("Navigated to: " + currentURL);
 
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.navigateToProductsPage();
         productsPage.scrollToProductList();
         productsPage.navigateToProductSubCategory();
-        System.out.println(productsPage.productsCategoryPageTitle.getText());
 
         Assert.assertTrue(productsPage.productsCategoryPageTitle.getText().contains("WOMEN - TOPS PRODUCTS"));
-        ExtentTestNGListener.test.get().pass("Products Subcategory Page was navigated successfully");
+        ExtentTestNGListener.test.get().pass("Products Sub-category Page was navigated successfully");
     }
 }
