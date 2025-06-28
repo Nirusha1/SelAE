@@ -9,8 +9,7 @@ import utils.BaseTest;
 
 @Listeners(ExtentTestNGListener.class)
 public class LoginTest extends BaseTest {
-    @Test
-
+    @Test(priority = 1, description = "Verify valid login")
     public void testValidLogin() {
         ExtentTestNGListener.test.get().info("Navigating to login page");
         String currentURL = "https://automationexercise.com/";
@@ -27,7 +26,7 @@ public class LoginTest extends BaseTest {
         ExtentTestNGListener.test.get().pass("Login test completed.");
     }
 
-    @Test
+    @Test(priority = 2, description = "Verify invalid login")
     public void testInvalidLogin() {
         ExtentTestNGListener.test.get().info("Navigating to login page");
         String currentURL = "https://automationexercise.com/";

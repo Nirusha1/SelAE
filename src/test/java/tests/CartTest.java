@@ -12,7 +12,7 @@ import utils.BaseTest;
 @Listeners(ExtentTestNGListener.class)
 public class CartTest extends BaseTest {
 
-    @Test
+    @Test(priority = 1, description = "Verify Cart Navigation and Cart product details")
     public void testAddProductsToCart() {
         ExtentTestNGListener.test.get().info("Navigating to Products page");
         String currentURL = "https://automationexercise.com/";
@@ -47,7 +47,7 @@ public class CartTest extends BaseTest {
         ExtentTestNGListener.test.get().info("Product details on products page and cart matched for second product");
     }
 
-    @Test(dependsOnMethods = "testAddProductsToCart")
+    @Test(dependsOnMethods = "testAddProductsToCart", description = "Verify product Removal from Cart")
     public void testRemoveProductsFromCart() {
         CartPage cartPage = new CartPage(driver);
         cartPage.deleteProductFromCart();
