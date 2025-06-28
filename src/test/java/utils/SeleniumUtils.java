@@ -4,6 +4,7 @@ import listeners.ExtentTestNGListener;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,6 +53,12 @@ public class SeleniumUtils {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         ExtentTestNGListener.info("Scrolled view to: " + element.getTagName());
+    }
+
+    public void hover(WebElement element) {
+        Actions action = new Actions(driver);
+        action.moveToElement(element).perform();
+        ExtentTestNGListener.info("Hovered: " + element.getTagName());
     }
 
 }
