@@ -6,6 +6,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.BaseTest;
+import utils.ConfigReader;
 
 @Listeners(ExtentTestNGListener.class)
 public class LoginTest extends BaseTest {
@@ -19,8 +20,8 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage();
 
-        loginPage.login("bhintunasayami123@gmail.com", "Selenium123");
-        ExtentTestNGListener.test.get().info("Entered email"+"bhintunasayami123@gmail.com");
+        loginPage.login(ConfigReader.get("test.user.email"), ConfigReader.get("test.user.password"));
+        ExtentTestNGListener.test.get().info("Entered email"+ ConfigReader.get("test.user.email"));
 
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login was not successful.");
         ExtentTestNGListener.test.get().pass("Login test completed.");
