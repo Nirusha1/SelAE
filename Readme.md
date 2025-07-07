@@ -43,7 +43,7 @@ Here is how your **Extent Report will look:**
 > 📸 **Add your report screenshot as `assets/sample-report.png`**
 
 <p align="center">
-  <img src="test-output/screenshots/extentReportSample.png" alt="Sample Extent Report" width="800"/>
+  <img src="extentReportSample.png" alt="Sample Extent Report" width="800"/>
 </p>
 
 ---
